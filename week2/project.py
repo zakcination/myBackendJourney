@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 
-from decorators import (log_decorator, tasks_validation_decorator,
-                        timing_decorator)
 from employee import Employee
 from task import Task
+from decorators import log_decorator
+from decorators import tasks_validation_decorator
+from decorators import timing_decorator
+import settings
 
 
 @dataclass
@@ -16,9 +18,9 @@ class Project:
     _duration: str = None
 
     @staticmethod
-    def validate_budget(budget):
-        if float(budget) < float(100000):
-            raise ValueError("Budget cannot be Less than 100 000 tenge")
+    def validate_budget(budget): 
+        if float(budget) < float(settings.BUDGET_LIMIT):
+            raise ValueError(f"Budget cannot be Less than {settings.BUDGET_LIMIT} tenge")
         return budget
 
     @classmethod
