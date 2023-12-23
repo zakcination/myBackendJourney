@@ -21,10 +21,11 @@ class Employee:
     def __gt__(self, other):
         return self.salary > other.salary
 
-    def __str__(self) -> str:
-        return (f" |+ Employee +|\n"
-                f" |+++ Name: {self.name}\n"
-                f" |+++ ID: {self.id}\n"
-                f" |+++ Salary: {self.salary}\n"
-                f" |+++ Department: {self.department}\n"
-                )
+    def __str__(self) -> str:  
+        return (
+            f" |+ Employee +|\n"
+            f" |+++ Name: {self.name}\n"
+            f" |+++ ID: {self.id}\n"
+            f" |+++ Salary: {self.salary}\n"
+            f" |+++ Department: {self.department}\n"
+        )

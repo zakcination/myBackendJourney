@@ -7,18 +7,6 @@ from Exceptions import InvalidPriorityError
 
 @dataclass
 class Task:
-    def calculate_suggestion(self):
-        urgency = (self._deadline - datetime.now()).days
-        if self._priority == 'high' and urgency <= 2:
-            sugg = 'Do this now'
-        elif self._priority == 'low' and urgency > 2:
-            sugg = 'Eliminate'
-        elif self._priority == 'high' and urgency > 2:
-            sugg = 'Do this later'
-        else:  # self.priority == 'low' and urgency <= 2
-            sugg = 'Delegate'
-        return sugg
-
     def __init__(self, name, description, deadline, priority, payment):
         self._name = name
         self._description = description
@@ -28,6 +16,21 @@ class Task:
         self._payment = payment
         self.validate_payment(payment)
         self._suggestion: str = self.calculate_suggestion()
+
+    def calculate_suggestion(self):
+        urgency = (self._deadline - datetime.now()).days
+        
+        #have skipped few(half) cases
+
+        if self._priority == 'high' and urgency <= 2:
+            sugg = 'Do this now'
+        elif self._priority == 'low' and urgency > 2:
+            sugg = 'Eliminate'
+        elif self._priority == 'high' and urgency > 2:
+            sugg = 'Do this later'
+        else:  # self.priority == 'low' and urgency <= 2
+            sugg = 'Delegate'
+        return sugg
 
     @staticmethod
     def validate_payment(payment):
@@ -56,12 +59,14 @@ class Task:
         self._payment = payment
 
     def __str__(self):
-        return (f"\\n"
-                f"  |- Task:\n"
-                f"  |--- Name: {self._name}\n"
-                f"  |--- Description: {self._description}\n"
-                f"  |--- Date Created: {self._date_created}\n"
-                f"  |--- Deadline: {self._deadline}\n"
-                f"  |--- Priority: {self._priority}\n"
-                f"  |--- Payment: {self._payment}\n"
-                f"  |--- Suggestion: {self._suggestion}\n")
+        return (
+            f"\\n"
+            f"  |- Task:\n"
+            f"  |--- Name: {self._name}\n"
+            f"  |--- Description: {self._description}\n"
+            f"  |--- Date Created: {self._date_created}\n"
+            f"  |--- Deadline: {self._deadline}\n"
+            f"  |--- Priority: {self._priority}\n"
+            f"  |--- Payment: {self._payment}\n"
+            f"  |--- Suggestion: {self._suggestion}\n"
+        )

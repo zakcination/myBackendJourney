@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from Employee import Employee
-from Task import Task
-from decorators import log_decorator
-from decorators import tasks_validation_decorator
-from decorators import timing_decorator
+
+from decorators import (log_decorator, tasks_validation_decorator,
+                        timing_decorator)
+from employee import Employee
+from task import Task
 
 
 @dataclass

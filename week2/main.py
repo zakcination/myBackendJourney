@@ -1,7 +1,8 @@
 from datetime import datetime
-from Employee import Employee
-from Project import Project
-from Task import Task
+
+from employee import Employee
+from project import Project
+from task import Task
 
 employees = [
     Employee("John", 1, 100000, "IT"),
