@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratings</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f6f8fa;
+            color: #24292e;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-color: #e1e4e8;
+        }
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .small-font {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .review {
+            border: 1px solid #e1e4e8;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Project Movie</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/movies">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ratings">Ratings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reviewers">Reviewers</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Ratings</h2>
+        <div class="row">
+            {% for movie, review_count, average_rating, reviews in movies %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="small-font">Movie ID: {{ movie.mid }}</p>
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <small class="text-muted">({{ review_count }} reviews, average rating: {{ average_rating|round(1) }})</small>
+                        {% for review in reviews %}
+                        <div class="review">
+                            <p class="card-text">Rating: {{ review.stars }} <strong>{{ review.parent_reviewer.name }} {{ review.parent_reviewer.surname }}</strong></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
