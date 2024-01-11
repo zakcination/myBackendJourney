@@ -74,7 +74,7 @@ def create_movies():
     db.session.add(new_movie)
     db.session.commit()
     return make_response(jsonify({'message': 'movie created'}), 201)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error creating movie'}), 500)
 
 # create a reviewer
@@ -86,7 +86,7 @@ def create_reviewers():
     db.session.add(new_reviewer)
     db.session.commit()
     return make_response(jsonify({'message': 'reviewer created'}), 201)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error creating reviewer'}), 500)
   
 # create a rating
@@ -98,7 +98,7 @@ def create_ratings():
     db.session.add(new_rating)
     db.session.commit()
     return make_response(jsonify({'message': 'rating created'}), 201)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error creating rating'}), 500)
   
 
@@ -108,7 +108,7 @@ def get_movies():
   try:
     movies = Movie.query.all()
     return render_template('movies.html', movies=movies)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error getting movies'}), 500)
   
 # get all reviewers
@@ -117,7 +117,7 @@ def get_reviewers():
   try:
     reviewers = Reviewer.query.all()
     return render_template('reviewers.html', reviewers=reviewers)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error getting reviewers'}), 500)
   
 
@@ -137,7 +137,7 @@ def get_ratings():
             movies.append((movie, review_count, average_rating, reviews))
 
         return render_template('ratings.html', movies=movies)
-    except e:
+    except Exception as e:
         return make_response(jsonify({'message': 'error getting ratings'}), 500)
   
 
@@ -149,7 +149,7 @@ def get_movie(mid):
     if movie:
       return make_response(jsonify({'movie': movie.json()}), 200)
     return make_response(jsonify({'message': 'movie not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error getting movie'}), 500)
   
 
@@ -161,7 +161,7 @@ def get_reviewer(rid):
     if reviewer:
       return make_response(jsonify({'reviewer': reviewer.json()}), 200)
     return make_response(jsonify({'message': 'reviewer not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error getting reviewer'}), 500)
   
 
@@ -173,7 +173,7 @@ def get_rating(rating_id):
     if rating:
       return make_response(jsonify({'rating': rating.json()}), 200)
     return make_response(jsonify({'message': 'rating not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error getting rating'}), 500)
   
 
@@ -190,7 +190,7 @@ def update_movie(mid):
       db.session.commit()
       return make_response(jsonify({'message': 'movie updated'}), 200)
     return make_response(jsonify({'message': 'movie not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error updating movie'}), 500)
 
 
@@ -207,7 +207,7 @@ def update_reviewer(rid):
       db.session.commit()
       return make_response(jsonify({'message': 'reviewer updated'}), 200)
     return make_response(jsonify({'message': 'reviewer not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error updating reviewer'}), 500)
 
 
@@ -225,7 +225,7 @@ def update_rating(rating_id):
       db.session.commit()
       return make_response(jsonify({'message': 'rating updated'}), 200)
     return make_response(jsonify({'message': 'rating not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error updating rating'}), 500)
 
 
@@ -239,7 +239,7 @@ def delete_movie(mid):
       db.session.commit()
       return make_response(jsonify({'message': 'movie deleted'}), 200)
     return make_response(jsonify({'message': 'movie not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error deleting movie'}), 500)
 
 
@@ -253,7 +253,7 @@ def delete_reviewer(rid):
       db.session.commit()
       return make_response(jsonify({'message': 'reviewer deleted'}), 200)
     return make_response(jsonify({'message': 'reviewer not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error deleting reviewer'}), 500)
   
 
@@ -267,5 +267,5 @@ def delete_rating(rating_id):
       db.session.commit()
       return make_response(jsonify({'message': 'rating deleted'}), 200)
     return make_response(jsonify({'message': 'rating not found'}), 404)
-  except e:
+  except Exception as e:
     return make_response(jsonify({'message': 'error deleting rating'}), 500)
